@@ -9,8 +9,9 @@ import { EmployeeResponseInput } from "@/components/roleplay/EmployeeResponseInp
 import { FeedbackPanel } from "@/components/roleplay/FeedbackPanel";
 import { CompletionScreen } from "@/components/roleplay/CompletionScreen";
 import { EmployeeResponse, Feedback } from "@/types";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { User } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function Training() {
   const { isAuthenticated, currentEmployee } = useAuth();
@@ -30,7 +31,34 @@ export default function Training() {
   } = useTraining();
   
   const navigate = useNavigate();
+  const location = useLocation();
+  const { toast } = useToast();
   const [allFeedback, setAllFeedback] = useState<Feedback[]>([]);
+  
+  // Handle browser back button
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (currentScenario) {
+        event.preventDefault();
+        return event.returnValue = "Are you sure you want to leave? Your training progress will be lost.";
+      }
+    };
+
+    const handlePopState = () => {
+      if (currentScenario) {
+        completeScenario();
+        navigate('/dashboard');
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('popstate', handlePopState);
+    
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [currentScenario, completeScenario, navigate]);
   
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -67,7 +95,19 @@ export default function Training() {
   
   const handleComplete = () => {
     completeScenario();
+    toast({
+      title: "Training completed",
+      description: "Your progress has been saved.",
+      duration: 3000,
+    });
     navigate("/dashboard");
+  };
+
+  const handleExit = () => {
+    if (window.confirm("Are you sure you want to exit? Your progress will be saved.")) {
+      completeScenario();
+      navigate("/dashboard");
+    }
   };
   
   if (!isAuthenticated || !currentEmployee || !currentScenario || !currentStep) {
@@ -99,7 +139,7 @@ export default function Training() {
         scenario={currentScenario}
         currentStep={currentStep}
         totalSteps={scenarioSteps.length}
-        onExit={handleComplete}
+        onExit={handleExit}
       />
       
       <main className="container mx-auto px-4 py-6 max-w-4xl">
