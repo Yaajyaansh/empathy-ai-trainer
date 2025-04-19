@@ -1,13 +1,28 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { TrainingProvider } from "@/contexts/TrainingContext";
 
 const Index = () => {
+  const navigate = useNavigate();
+
+  // Redirect to login page
+  useEffect(() => {
+    navigate("/login");
+  }, [navigate]);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <AuthProvider>
+      <TrainingProvider>
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold mb-4">Retail Training Simulator</h1>
+            <p className="text-xl text-gray-600">Loading application...</p>
+          </div>
+        </div>
+      </TrainingProvider>
+    </AuthProvider>
   );
 };
 

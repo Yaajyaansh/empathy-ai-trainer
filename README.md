@@ -1,73 +1,78 @@
-# Welcome to your Lovable project
 
-## Project info
+# Retail Employee Training App
 
-**URL**: https://lovable.dev/projects/49ba9d66-89cf-4dad-81f8-70779c2790ac
+A training application designed to help retail employees practice and improve their customer service and sales skills through AI-powered role-play scenarios.
 
-## How can I edit this code?
+## Overview
 
-There are several ways of editing your application.
+This application leverages Sesame AI's Miles API to provide realistic customer interaction simulations for retail employees. Employees can practice handling various customer scenarios, receive immediate feedback, and track their progress over time.
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/49ba9d66-89cf-4dad-81f8-70779c2790ac) and start prompting.
+### Core Features
 
-Changes made via Lovable will be committed automatically to this repo.
+- **AI Role-play Scenarios**: Simulated customer interactions for training using Sesame AI's Miles API
+- **Immediate AI Feedback**: Performance evaluation based on empathy, clarity, and responsiveness
+- **Employee Progress Tracking**: Monitor improvement over time with detailed metrics
+- **Customizable Training Modules**: Different categories of training scenarios
 
-**Use your preferred IDE**
+### Key Sections
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. **Dashboard**: View available training modules and track progress
+2. **Training Simulator**: Interactive role-play with simulated customers
+3. **Feedback Analysis**: Detailed evaluation of performance with specific improvement suggestions
+4. **Progress Reports**: Track improvement over time across different skill areas
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Technical Implementation
 
-Follow these steps:
+### Frontend
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- React with TypeScript
+- TailwindCSS for styling
+- Context API for state management
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Integration
 
-# Step 3: Install the necessary dependencies.
-npm i
+- Designed to integrate with Sesame AI's Miles API for:
+  - Customer conversation simulation
+  - Response evaluation
+  - Personalized feedback generation
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## Getting Started
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Demo Access
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Use the following credentials to access the demo:
+- **Email**: john.smith@retailtraining.com
+- **Password**: password
 
-**Use GitHub Codespaces**
+## Implementation Notes
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Miles API Integration
 
-## What technologies are used for this project?
+The current version uses mock data to simulate the Miles API functionality. For production:
 
-This project is built with:
+1. Update the `milesAPI.ts` service with actual API endpoints
+2. Implement proper authentication with Sesame AI
+3. Update the response processing to match the actual API response format
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Customizing Training Scenarios
 
-## How can I deploy this project?
+Training scenarios can be customized by editing the mock data files. In a production environment, these would be stored in a database and managed through an admin interface.
 
-Simply open [Lovable](https://lovable.dev/projects/49ba9d66-89cf-4dad-81f8-70779c2790ac) and click on Share -> Publish.
+## Future Enhancements
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- **Manager Dashboard**: For overseeing team progress
+- **Custom Scenario Creation**: Interface for creating company-specific training scenarios
+- **Advanced Analytics**: Deeper insights into employee performance trends
+- **Mobile Application**: For on-the-go training
